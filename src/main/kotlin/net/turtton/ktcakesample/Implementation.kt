@@ -1,6 +1,6 @@
 package net.turtton.ktcakesample
 
-interface MixinGenerateRandomGenerateUserID : UseGenerateUserID {
+interface MixinRandomGenerateUserID : UseGenerateUserID {
     override val generateUserID: GenerateUserID
         get() = RandomGenerateUserID
 }
@@ -9,28 +9,28 @@ private object RandomGenerateUserID : GenerateUserID {
     override fun generate(): UserID = UserID(java.util.UUID.randomUUID().toString())
 }
 
-interface MixinRegisterUserWorkflow : UseRegisterUserWorkflow {
+interface MixinInMemoryRegisterUserWorkflow : UseRegisterUserWorkflow {
     override val registerUserWorkflow: RegisterGenerateUserWorkflow
-        get() = RegisterWorkflowImpl
+        get() = InMemoryRegisterWorkflow
 }
 
-private object RegisterWorkflowImpl : RegisterGenerateUserWorkflow, MixinGenerateRandomGenerateUserID, MixinUserRepository
+private object InMemoryRegisterWorkflow : RegisterGenerateUserWorkflow, MixinRandomGenerateUserID, MixinInMemoryUserRepository
 
-interface MixinChangeDisplayNameUserWorkflow : UseChangeDisplayNameUserWorkflow {
+interface MixinInMemoryChangeDisplayNameUserWorkflow : UseChangeDisplayNameUserWorkflow {
     override val changeDisplayNameUserWorkflow: ChangeDisplayNameUserWorkflow
-        get() = ChangeDisplayNameUserWorkflowImpl
+        get() = InMemoryChangeDisplayNameUserWorkflow
 }
 
-private object ChangeDisplayNameUserWorkflowImpl : ChangeDisplayNameUserWorkflow, MixinUserRepository
+private object InMemoryChangeDisplayNameUserWorkflow : ChangeDisplayNameUserWorkflow, MixinInMemoryUserRepository
 
-interface MixinDumpAllUserWorkflow : UseDumpAllUserWorkflow {
+interface MixinInMemoryDumpAllUserWorkflow : UseDumpAllUserWorkflow {
     override val dumpAllUserWorkflow: DumpAllUserWorkflow
-        get() = DumpAllUserWorkflowImpl
+        get() = InMemoryDumpAllUserWorkflow
 }
 
-private object DumpAllUserWorkflowImpl : DumpAllUserWorkflow, MixinUserRepository
+private object InMemoryDumpAllUserWorkflow : DumpAllUserWorkflow, MixinInMemoryUserRepository
 
-interface MixinUserRepository : UseUserRepository {
+interface MixinInMemoryUserRepository : UseUserRepository {
     override val userRepository: UserRepository
         get() = InMemoryUserRepository
 }

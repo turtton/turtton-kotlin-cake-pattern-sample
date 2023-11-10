@@ -10,7 +10,7 @@ interface UseRegisterUserWorkflow {
 }
 
 // 実装前のinterfaceの段階で使用する依存関係を明記しておく
-// この段階で複数の実装を持たない場合は書ける
+// この段階で複数の実装を持たない場合は詳細が書ける
 interface RegisterGenerateUserWorkflow : UseGenerateUserID, UseUserRepository {
     fun register(workflow: RegisterUserForm): UserID {
         userRepository.loadByMailAddress(workflow.mailAddress)?.apply {

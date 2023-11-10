@@ -5,9 +5,9 @@ fun main(args: Array<String>) {
         object :
             Environment,
 //        MixinUserRepository,
-            MixinRegisterUserWorkflow,
-            MixinChangeDisplayNameUserWorkflow,
-            MixinDumpAllUserWorkflow
+            MixinInMemoryRegisterUserWorkflow,
+            MixinInMemoryChangeDisplayNameUserWorkflow,
+            MixinInMemoryDumpAllUserWorkflow
 //        MixinGenerateRandomUserId
         {}
 
